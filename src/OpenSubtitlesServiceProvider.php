@@ -2,7 +2,7 @@
 
 namespace CodeBugLab\OpenSubtitles;
 
-use CodeBugLab\OpenSubtitles\HttpRequest\Curl;
+use CodeBugLab\OpenSubtitles\HttpRequest\HttpRequest;
 use CodeBugLab\OpenSubtitles\OpenSubtitles;
 use CodeBugLab\OpenSubtitles\Repository\AbstractRepository;
 use CodeBugLab\OpenSubtitles\Url\ApiGenerator;
@@ -25,7 +25,12 @@ class OpenSubtitlesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(ApiGenerator::class, function () {
-            return new ApiGenerator(AbstractRepository::$apiUrl, config('opensubtitles.api_key'), new Curl);
+            return new ApiGenerator(
+                AbstractRepository::$apiUrl,
+                config('opensubtitles.api_key'),
+                config('opensubtitles.user_agent'),
+                new HttpRequest()
+            );
         });
 
         $this->app->singleton('OpenSubtitles', OpenSubtitles::class);
