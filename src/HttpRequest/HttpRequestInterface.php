@@ -14,10 +14,11 @@ interface HttpRequestInterface
     public function post(string $url, array $fields, array $header): ?string;
 
     /**
-     * @param  string $url
-     * @param  array  $header
+     * @param  string      $url
+     * @param  array       $parametrs
+     * @param  array       $header
      *
-     * @return null|string
+     * @return string|null
      */
-    public function get(string $url, array $header): ?string;
+    public function get(string $url, array $parametrs, array $header): ?string;
 }
