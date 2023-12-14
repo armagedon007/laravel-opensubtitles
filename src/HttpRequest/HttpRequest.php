@@ -31,7 +31,6 @@ class HttpRequest implements HttpRequestInterface
     {
         $response = $this->client->post($url, [
             'headers' => array_merge($header, [
-                'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ]),
             'http_errors' => false,
