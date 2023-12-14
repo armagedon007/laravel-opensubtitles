@@ -34,7 +34,6 @@ class HttpRequest implements HttpRequestInterface
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ]),
-            'stream' => true,
             'http_errors' => false,
             'json' => $fields,
         ]);
@@ -44,14 +43,17 @@ class HttpRequest implements HttpRequestInterface
 
     /**
      * @param  string      $url
+     * @param  array       $parametrs
      * @param  array       $header
      *
      * @return string|null
      */
-    public function get(string $url, array $header): ?string
+    public function get(string $url, array $parametrs, array $header): ?string
     {
         $response = $this->client->get($url, [
             'headers' => $header,
+            'http_errors' => false,
+            'query' => $parametrs,
         ]);
 
         return $response->getBody()->getContents();
